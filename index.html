@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>奇美醫院 教師培育中心 | 課程平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --primary: #0a6b7c;
+    --primary-dark: #064b58;
+    --primary-light: #e6f4f7;
+    --primary-pale: #f2f9fa;
+    --accent: #d97757;
+    --accent-light: #fdf0eb;
+    --gold: #b8860b;
+    --gold-light: #fdf6e3;
+    --pink: #c0578a;
+    --pink-light: #fbeaf2;
+    --gray-50: #fafaf9;
+    --gray-100: #f5f5f4;
+    --gray-200: #e7e5e4;
+    --gray-300: #d6d3d1;
+    --gray-400: #a8a29e;
+    --gray-500: #78716c;
+    --gray-700: #44403c;
+    --gray-900: #1c1917;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans TC', system-ui, -apple-system, "Microsoft JhengHei", sans-serif;
+    background: var(--gray-50);
+    color: var(--gray-900);
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+  .view { display: none; }
+  .view.active { display: block; animation: fadeIn .35s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ============ Header ============ */
+  .topbar {
+    background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: #fff;
+    position: sticky; top: 0; z-index: 200;
+    box-shadow: 0 2px 12px rgba(6,75,88,0.18);
+  }
+  .topbar-inner {
+    max-width: 1280px; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px; gap: 24px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; cursor: pointer; flex-shrink: 0; }
+  .brand-logo {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: #fff; display: flex; align-items: center; justify-content: center;
+    color: var(--primary-dark); font-weight: 900; font-size: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .brand-text { line-height: 1.3; }
+  .brand-title { font-size: 15px; font-weight: 700; letter-spacing: 0.5px; }
+  .brand-sub { font-size: 10.5px; opacity: 0.75; letter-spacing: 0.5px; font-weight: 300; }
+  .nav-links { display: flex; align-items: center; gap: 4px; flex: 1; justify-content: center; }
+  .nav-links a {
+    padding: 10px 16px; border-radius: 8px; font-size: 14.5px; font-weight: 500;
+    opacity: 0.88; transition: all .15s; white-space: nowrap; cursor: pointer;
+  }
+  .nav-links a:hover, .nav-links a.active { opacity: 1; background: rgba(255,255,255,0.14); }
+  .topbar-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+  .icon-btn {
+    width: 38px; height: 38px; border-radius: 50%; border: none;
+    background: transparent; color: #fff; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: background .15s;
+  }
+  .icon-btn:hover { background: rgba(255,255,255,0.16); }
+  .icon-btn svg { width: 19px; height: 19px; }
+  @media (max-width: 980px) { .nav-links { display: none; } }
+
+  /* ============ Hero ============ */
+  .hero {
+    position: relative;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255,255,255,0.10) 0%, transparent 45%),
+      radial-gradient(circle at 85% 75%, rgba(255,255,255,0.08) 0%, transparent 50%),
+      linear-gradient(120deg, var(--primary-dark) 0%, var(--primary) 55%, #0e8a9e 100%);
+    color: #fff;
+    overflow: hidden;
+  }
+  .hero-inner {
+    max-width: 1280px; margin: 0 auto; padding: 64px 24px 56px;
+    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px; align-items: center;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22);
+    padding: 6px 14px; border-radius: 20px; font-size: 12.5px; font-weight: 600;
+    letter-spacing: 0.5px; margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(30px, 3.6vw, 46px); font-weight: 900; line-height: 1.3;
+    letter-spacing: 0.5px; margin-bottom: 16px;
+  }
+  .hero p.lead { font-size: 16px; opacity: 0.88; font-weight: 300; margin-bottom: 30px; max-width: 480px; }
+  .hero-search {
+    display: flex; gap: 10px; background: #fff; padding: 6px; border-radius: 14px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.2); max-width: 560px;
+  }
+  .hero-search input {
+    flex: 1; border: none; outline: none; padding: 12px 16px; font-size: 14.5px;
+    font-family: inherit; color: var(--gray-900); background: transparent;
+  }
+  .hero-search button {
+    background: var(--primary); color: #fff; border: none; border-radius: 9px;
+    padding: 0 24px; font-size: 14.5px; font-weight: 600; cursor: pointer;
+    display: flex; align-items: center; gap: 8px; transition: background .15s;
+  }
+  .hero-search button:hover { background: var(--primary-dark); }
+  .hero-search button svg { width: 16px; height: 16px; }
+  .hero-stats { display: flex; gap: 28px; margin-top: 26px; }
+  .hero-stat b { display: block; font-size: 24px; font-weight: 900; }
+  .hero-stat span { font-size: 12px; opacity: 0.78; }
+
+  /* Hero visual: campus card illustration */
+  .hero-visual {
+    position: relative; height: 340px; border-radius: 22px; overflow: hidden;
+    background: linear-gradient(160deg, #0c7d90 0%, #0a6b7c 100%);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.28);
+  }
+  .hero-visual .campus-illustration {
+    position: absolute; inset: 0;
+  }
+  .hero-floating-card {
+    position: absolute; bottom: 18px; left: 18px; right: 18px;
+    background: rgba(255,255,255,0.96); backdrop-filter: blur(6px);
+    border-radius: 14px; padding: 14px 16px;
+    display: flex; align-items: center; gap: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    color: var(--gray-900);
+  }
+  .hero-floating-card .fc-icon {
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+    background: var(--primary-light); color: var(--primary-dark);
+    display: flex; align-items: center; justify-content: center; font-size: 18px;
+  }
+  .hero-floating-card .fc-title { font-size: 13px; font-weight: 700; }
+  .hero-floating-card .fc-sub { font-size: 11.5px; color: var(--gray-500); margin-top: 2px; }
+
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { height: 220px; }
+  }
+
+  /* ============ Section shell ============ */
+  section.block { padding: 44px 0; }
+  .block-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 22px; flex-wrap: wrap; gap: 10px;
+  }
+  .block-title { font-size: 21px; font-weight: 800; color: var(--gray-900); }
+  .block-link { font-size: 13.5px; color: var(--primary); font-weight: 600; cursor: pointer; }
+  .block-link:hover { text-decoration: underline; }
+
+  /* ============ Category grid ============ */
+  .cat-grid {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px;
+  }
+  .cat-card {
+    background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius-md);
+    padding: 20px 16px; text-align: center; cursor: pointer;
+    transition: all .18s;
+  }
+  .cat-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 10px 26px rgba(10,107,124,0.12); }
+  .cat-icon {
+    width: 46px; height: 46px; border-radius: 12px; margin: 0 auto 12px;
+    display: flex; align-items: center; justify-content: center; font-size: 21px;
+  }
+  .cat-name { font-size: 14px; font-weight: 700; color: var(--gray-900); margin-bottom: 2px; }
+  .cat-en { font-size: 10.5px; color: var(--gray-400); letter-spacing: 0.3px; }
+  @media (max-width: 900px) { .cat-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 560px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ============ Tabs ============ */
+  .tab-row { display: flex; gap: 6px; }
+  .tab-btn {
+    border: 1.5px solid var(--gray-200); background: #fff; color: var(--gray-700);
+    padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all .15s;
+  }
+  .tab-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+  /* ============ Course cards (grid, homepage) ============ */
+  .course-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 980px) { .course-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .course-grid { grid-template-columns: 1fr; } }
+
+  .course-card {
+    background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius-md);
+    overflow: hidden; cursor: pointer; transition: all .2s; display: flex; flex-direction: column;
+  }
+  .course-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(10,107,124,0.14); border-color: transparent; }
+
+  .course-poster {
+    position: relative; aspect-ratio: 16/10; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: space-between; padding: 16px;
+    color: #fff;
+  }
+  .course-poster .date-chip {
+    align-self: flex-start; background: rgba(255,255,255,0.92); color: var(--primary-dark);
+    border-radius: 10px; padding: 6px 10px; text-align: center; min-width: 52px;
+  }
+  .date-chip .dc-year { font-size: 9px; font-weight: 700; opacity: 0.7; letter-spacing: 0.5px; }
+  .date-chip .dc-day { font-size: 20px; font-weight: 900; line-height: 1.05; }
+  .date-chip .dc-wk { font-size: 9.5px; font-weight: 600; opacity: 0.85; }
+  .course-poster .poster-icon { position: absolute; right: -6px; bottom: -10px; font-size: 92px; opacity: 0.16; }
+  .course-poster .poster-title {
+    font-size: 15px; font-weight: 800; line-height: 1.4; position: relative; z-index: 1;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    overflow-wrap: break-word;
+  }
+
+  .course-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 0; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag {
+    font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 8px;
+    white-space: nowrap;
+  }
+  .tag.cfd { background: var(--primary-light); color: var(--primary-dark); }
+  .tag.faculty { background: #ddf3e7; color: #14803c; }
+  .tag.type { background: var(--gray-100); color: var(--gray-700); }
+  .tag.sel { background: var(--pink-light); color: var(--pink); }
+  .tag.credit { background: var(--gold-light); color: var(--gold); }
+  .course-title { font-size: 15px; font-weight: 700; color: var(--gray-900); line-height: 1.4; min-height: 2.8em; overflow-wrap: break-word; }
+  .course-meta-line {
+    font-size: 12.5px; color: var(--gray-500); display: flex; align-items: center; gap: 6px;
+  }
+  .course-meta-line svg { width: 13px; height: 13px; flex-shrink: 0; }
+  .course-foot {
+    margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--gray-200);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .btn-detail {
+    font-size: 12.5px; font-weight: 700; color: var(--primary);
+    display: flex; align-items: center; gap: 4px;
+  }
+  .bookmark-mini {
+    width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--gray-200);
+    background: #fff; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--gray-400); transition: all .15s;
+  }
+  .bookmark-mini:hover, .bookmark-mini.on { color: var(--accent); border-color: var(--accent); }
+  .bookmark-mini svg { width: 14px; height: 14px; }
+
+  /* ============ Panels row (browse-by) ============ */
+  .panels-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  @media (max-width: 900px) { .panels-row { grid-template-columns: 1fr; } }
+  .panel {
+    background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius-md);
+    padding: 20px;
+  }
+  .panel-title { font-size: 14.5px; font-weight: 800; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .panel-title svg { width: 17px; height: 17px; color: var(--primary); }
+  .plist { display: flex; flex-direction: column; gap: 2px; }
+  .plist a {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 9px 8px; border-radius: 8px; font-size: 13.5px; color: var(--gray-700);
+    cursor: pointer; transition: background .15s;
+  }
+  .plist a:hover { background: var(--primary-pale); color: var(--primary-dark); }
+  .plist .count {
+    font-size: 11.5px; color: #fff; background: var(--gray-300); border-radius: 10px;
+    padding: 1px 9px; font-weight: 700; min-width: 26px; text-align: center;
+  }
+  .plist a:hover .count { background: var(--primary); }
+  .plist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .plist-grid .pgi {
+    border: 1px solid var(--gray-200); border-radius: 10px; padding: 12px 10px;
+    text-align: center; cursor: pointer; transition: all .15s;
+  }
+  .plist-grid .pgi:hover { border-color: var(--primary); background: var(--primary-pale); }
+  .pgi-icon { font-size: 18px; margin-bottom: 4px; }
+  .pgi-name { font-size: 12.5px; font-weight: 700; }
+  .pgi-count { font-size: 11px; color: var(--gray-500); }
+  .rank-item {
+    display: flex; align-items: center; gap: 10px; padding: 9px 4px;
+    font-size: 13.5px; cursor: pointer; border-radius: 8px; transition: background .15s;
+  }
+  .rank-item:hover { background: var(--primary-pale); }
+  .rank-num {
+    width: 20px; height: 20px; border-radius: 50%; background: var(--gray-100); color: var(--gray-500);
+    display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0;
+  }
+  .rank-item:nth-child(-n+3) .rank-num { background: var(--accent); color: #fff; }
+  .panel-cta {
+    margin-top: 14px; width: 100%; padding: 10px; border-radius: 9px; border: none;
+    background: var(--primary-light); color: var(--primary-dark); font-weight: 700; font-size: 13px;
+    cursor: pointer; transition: background .15s;
+  }
+  .panel-cta:hover { background: var(--primary); color: #fff; }
+
+  /* ============ Breadcrumb ============ */
+  .breadcrumb {
+    font-size: 13px; color: var(--gray-500); padding: 16px 0 4px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .breadcrumb a { cursor: pointer; }
+  .breadcrumb a:hover { color: var(--primary); text-decoration: underline; }
+  .breadcrumb .sep { opacity: 0.5; }
+  .breadcrumb .current { color: var(--gray-900); font-weight: 600; }
+
+  /* ============ List view ============ */
+  .list-header { padding: 8px 0 20px; }
+  .list-title { font-size: 24px; font-weight: 900; margin-bottom: 18px; }
+  .search-bar {
+    display: flex; gap: 10px; background: #fff; border: 1.5px solid var(--gray-200);
+    border-radius: 12px; padding: 4px; margin-bottom: 18px;
+  }
+  .search-bar input {
+    flex: 1; border: none; outline: none; padding: 11px 14px; font-size: 14px; font-family: inherit;
+  }
+  .search-bar button {
+    background: var(--primary); color: #fff; border: none; border-radius: 8px;
+    width: 42px; display: flex; align-items: center; justify-content: center; cursor: pointer;
+  }
+  .search-bar button svg { width: 17px; height: 17px; }
+  .filter-bar {
+    display: flex; align-items: flex-end; gap: 14px; flex-wrap: wrap;
+    background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius-md);
+    padding: 16px 18px;
+  }
+  .filter-field { display: flex; flex-direction: column; gap: 5px; min-width: 140px; }
+  .filter-field label { font-size: 11.5px; font-weight: 700; color: var(--gray-500); }
+  .filter-field select {
+    padding: 9px 10px; border: 1.5px solid var(--gray-200); border-radius: 8px;
+    font-size: 13.5px; font-family: inherit; background: var(--gray-50); color: var(--gray-900);
+  }
+  .filter-field select:focus { outline: none; border-color: var(--primary); background: #fff; }
+  .filter-clear {
+    margin-left: auto; background: var(--gray-100); border: none; border-radius: 8px;
+    padding: 9px 16px; font-size: 13px; font-weight: 600; color: var(--gray-700); cursor: pointer;
+    align-self: flex-end;
+  }
+  .filter-clear:hover { background: var(--gray-200); }
+  .list-count { font-size: 13.5px; color: var(--gray-500); margin: 18px 2px; }
+  .list-count strong { color: var(--primary); font-size: 16px; }
+
+  .lc-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 30px; }
+  .lc-card {
+    display: grid; grid-template-columns: 96px 220px 1fr auto; gap: 18px; align-items: center;
+    background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius-md);
+    padding: 14px 18px; cursor: pointer; transition: all .18s;
+  }
+  .lc-card:hover { box-shadow: 0 10px 26px rgba(10,107,124,0.12); border-color: transparent; transform: translateY(-2px); }
+  .lc-date { text-align: center; }
+  .lc-date .ld-year { font-size: 10px; color: var(--gray-400); font-weight: 700; }
+  .lc-date .ld-day { font-size: 24px; font-weight: 900; color: var(--primary-dark); line-height: 1.1; }
+  .lc-date .ld-wk { font-size: 11.5px; color: var(--primary); font-weight: 600; }
+  .lc-thumb {
+    aspect-ratio: 16/10; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 34px; position: relative; overflow: hidden;
+  }
+  .lc-thumb .lt-title {
+    position: absolute; inset: 0; padding: 10px; display: flex; align-items: center;
+    font-size: 11.5px; font-weight: 800; line-height: 1.35; z-index: 1;
+  }
+  .lc-info { min-width: 0; }
+  .lc-info .tag-row { margin-bottom: 6px; }
+  .lc-info .lc-title { font-size: 15.5px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; overflow-wrap: break-word; }
+  .lc-info .lc-sub { font-size: 12.5px; color: var(--gray-500); display: flex; flex-wrap: wrap; gap: 4px 14px; }
+  .lc-info .lc-sub span { display: flex; align-items: center; gap: 4px; }
+  .lc-info .lc-sub svg { width: 12.5px; height: 12.5px; }
+  .lc-actions { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+  .btn-view {
+    background: var(--primary); color: #fff; border: none; border-radius: 8px;
+    padding: 9px 18px; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap;
+  }
+  .btn-view:hover { background: var(--primary-dark); }
+  @media (max-width: 860px) {
+    .lc-card { grid-template-columns: 64px 1fr; grid-template-areas: "date info" "thumb info" "actions actions"; }
+    .lc-thumb { display: none; }
+  }
+
+  .pagination { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 30px 0 50px; }
+  .page-btn {
+    min-width: 36px; height: 36px; border-radius: 8px; border: 1.5px solid var(--gray-200);
+    background: #fff; color: var(--gray-700); font-size: 13.5px; font-weight: 600; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; padding: 0 8px;
+  }
+  .page-btn:hover { border-color: var(--primary); color: var(--primary); }
+  .page-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+  .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .page-dots { color: var(--gray-400); padding: 0 4px; }
+
+  /* ============ Detail view ============ */
+  .detail-grid { display: grid; grid-template-columns: 1fr 320px; gap: 28px; padding: 20px 0 60px; align-items: start; }
+  @media (max-width: 980px) { .detail-grid { grid-template-columns: 1fr; } }
+
+  .detail-main { min-width: 0; }
+  .detail-poster {
+    width: 100%; max-width: 340px; aspect-ratio: 3/4; border-radius: var(--radius-lg); overflow: hidden;
+    display: flex; flex-direction: column; justify-content: space-between; padding: 26px;
+    color: #fff; position: relative; margin-bottom: 22px;
+  }
+  @media (max-width: 640px) { .detail-poster { max-width: 100%; } }
+  .detail-poster .dp-icon { position: absolute; right: -20px; bottom: -20px; font-size: 200px; opacity: 0.14; }
+  .detail-poster .dp-date { font-size: 13px; font-weight: 700; opacity: 0.92; position: relative; z-index:1; }
+  .detail-poster .dp-title { font-size: 24px; font-weight: 900; line-height: 1.45; position: relative; z-index:1; }
+
+  .detail-card {
+    background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius-md);
+    padding: 26px; margin-bottom: 20px;
+  }
+  .detail-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .detail-title { font-size: 25px; font-weight: 900; line-height: 1.4; margin-bottom: 18px; }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; margin-bottom: 6px; }
+  .info-row { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; }
+  .info-row .ir-icon {
+    width: 30px; height: 30px; border-radius: 8px; background: var(--primary-light); color: var(--primary-dark);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .info-row .ir-icon svg { width: 15px; height: 15px; }
+  .info-row .ir-label { font-size: 11px; color: var(--gray-500); }
+  .info-row .ir-value { font-weight: 600; color: var(--gray-900); }
+  .detail-cta-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--primary); color: #fff; border: none; border-radius: 9px;
+    padding: 12px 22px; font-size: 14px; font-weight: 700; cursor: pointer;
+    display: flex; align-items: center; gap: 8px; transition: background .15s;
+  }
+  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-ghost {
+    background: var(--primary-light); color: var(--primary-dark); border: none; border-radius: 9px;
+    padding: 12px 20px; font-size: 14px; font-weight: 700; cursor: pointer;
+    display: flex; align-items: center; gap: 8px; transition: background .15s;
+  }
+  .btn-ghost:hover { background: var(--primary); color: #fff; }
+  .btn-outline {
+    background: #fff; color: var(--gray-700); border: 1.5px solid var(--gray-200); border-radius: 9px;
+    padding: 12px 16px; font-size: 14px; font-weight: 700; cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+  .accordion { border-top: 1px solid var(--gray-200); }
+  .accordion:first-of-type { border-top: none; }
+  .acc-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 4px; cursor: pointer; font-size: 15px; font-weight: 700;
+  }
+  .acc-head svg { width: 16px; height: 16px; color: var(--gray-400); transition: transform .2s; }
+  .acc-item.open .acc-head svg { transform: rotate(180deg); }
+  .acc-body { max-height: 0; overflow: hidden; transition: max-height .25s ease; font-size: 14px; color: var(--gray-700); line-height: 1.9; }
+  .acc-item.open .acc-body { max-height: 600px; padding-bottom: 18px; }
+  .acc-body ul { padding-left: 20px; }
+  .acc-body li { margin-bottom: 4px; }
+
+  .side-card {
+    background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius-md);
+    padding: 20px; margin-bottom: 20px;
+  }
+  .side-title { font-size: 14px; font-weight: 800; margin-bottom: 14px; }
+  .side-link {
+    display: flex; align-items: center; gap: 10px; padding: 9px 6px; border-radius: 8px;
+    font-size: 13.5px; color: var(--gray-700); cursor: pointer; transition: background .15s;
+  }
+  .side-link:hover { background: var(--primary-pale); color: var(--primary-dark); }
+  .side-link svg { width: 15px; height: 15px; color: var(--primary); flex-shrink: 0; }
+  .share-row { display: flex; gap: 8px; }
+  .share-btn {
+    width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--gray-200); background: #fff;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--gray-500);
+    transition: all .15s;
+  }
+  .share-btn:hover { border-color: var(--primary); color: var(--primary); }
+  .share-btn svg { width: 16px; height: 16px; }
+  .rec-item { display: flex; gap: 10px; padding: 8px 0; cursor: pointer; }
+  .rec-item:hover .rec-title { color: var(--primary); }
+  .rec-thumb {
+    width: 56px; height: 56px; border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; color: #fff; font-size: 20px;
+  }
+  .rec-title { font-size: 12.5px; font-weight: 700; line-height: 1.4; margin-bottom: 4px; }
+  .rec-meta { font-size: 11px; color: var(--gray-500); }
+
+  /* ============ Footer ============ */
+  footer {
+    background: var(--primary-dark); color: rgba(255,255,255,0.85);
+    padding: 40px 0 24px; margin-top: 40px;
+  }
+  .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; align-items: center; }
+  .footer-brand { font-size: 14px; font-weight: 700; color: #fff; }
+  .footer-sub { font-size: 12px; opacity: 0.7; margin-top: 4px; }
+  .footer-links { display: flex; gap: 18px; font-size: 13px; }
+  .footer-links a:hover { text-decoration: underline; }
+
+  /* ============ Toast ============ */
+  .toast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--gray-900); color: #fff; padding: 12px 22px; border-radius: 50px;
+    font-size: 13.5px; font-weight: 500; box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    z-index: 500; opacity: 0; transition: all .3s ease; display: flex; align-items: center; gap: 8px;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ============ Header ============ -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand" data-nav="home">
+      <div class="brand-logo">CM</div>
+      <div class="brand-text">
+        <div class="brand-title">奇美醫院 教師培育中心</div>
+        <div class="brand-sub">CHI MEI HOSPITAL FACULTY DEVELOPMENT CENTER</div>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a data-nav="home" class="active">首頁</a>
+      <a data-nav="list">課程總覽</a>
+      <a data-nav="list" data-cat="">課程分類</a>
+      <a data-nav="list" data-credit="">學分說明</a>
+      <a>講師專區</a>
+      <a>資源下載</a>
+      <a>關於我們</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="btn-search-toggle" title="搜尋"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg></button>
+      <button class="icon-btn" id="btn-bookmarks" title="我的收藏"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21l-7-4-7 4V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HOME VIEW ============ -->
+<div class="view active" id="view-home">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="hero-eyebrow">✨ 提升教學專業・共創卓越醫療教育</span>
+        <h1>教師培育中心<br>課程平台</h1>
+        <p class="lead">整合全院演講、CFD 課程、實證醫學與教學技巧工作坊，一站掌握學分進度與報名資訊。</p>
+        <div class="hero-search">
+          <input id="hero-search-input" type="text" placeholder="搜尋課程名稱、講師、關鍵字…" />
+          <button id="hero-search-btn"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>進階搜學</button>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><b id="stat-total">128</b><span>總課程數</span></div>
+          <div class="hero-stat"><b>6</b><span>課程分類</span></div>
+          <div class="hero-stat"><b>13</b><span>本月新增</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <svg class="campus-illustration" viewBox="0 0 400 340" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="340" fill="url(#skygrad)"/>
+          <defs>
+            <linearGradient id="skygrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#0c7d90"/>
+              <stop offset="1" stop-color="#095c6b"/>
+            </linearGradient>
+          </defs>
+          <circle cx="330" cy="60" r="46" fill="rgba(255,255,255,0.08)"/>
+          <circle cx="60" cy="240" r="70" fill="rgba(255,255,255,0.06)"/>
+          <rect x="60" y="150" width="60" height="150" fill="rgba(255,255,255,0.14)"/>
+          <rect x="130" y="110" width="80" height="190" fill="rgba(255,255,255,0.22)"/>
+          <rect x="220" y="140" width="55" height="160" fill="rgba(255,255,255,0.16)"/>
+          <rect x="285" y="90" width="70" height="210" fill="rgba(255,255,255,0.26)"/>
+          <g fill="rgba(10,60,70,0.35)">
+            <rect x="140" y="125" width="10" height="10"/><rect x="158" y="125" width="10" height="10"/><rect x="176" y="125" width="10" height="10"/><rect x="194" y="125" width="10" height="10"/>
+            <rect x="140" y="150" width="10" height="10"/><rect x="158" y="150" width="10" height="10"/><rect x="176" y="150" width="10" height="10"/><rect x="194" y="150" width="10" height="10"/>
+            <rect x="140" y="175" width="10" height="10"/><rect x="158" y="175" width="10" height="10"/><rect x="176" y="175" width="10" height="10"/><rect x="194" y="175" width="10" height="10"/>
+            <rect x="295" y="105" width="10" height="12"/><rect x="315" y="105" width="10" height="12"/><rect x="335" y="105" width="10" height="12"/>
+            <rect x="295" y="135" width="10" height="12"/><rect x="315" y="135" width="10" height="12"/><rect x="335" y="135" width="10" height="12"/>
+            <rect x="295" y="165" width="10" height="12"/><rect x="315" y="165" width="10" height="12"/><rect x="335" y="165" width="10" height="12"/>
+          </g>
+          <rect x="0" y="300" width="400" height="40" fill="rgba(6,45,53,0.4)"/>
+          <path d="M0 300 Q60 285 120 300 T240 300 T400 295 V340 H0 Z" fill="rgba(20,110,80,0.35)"/>
+        </svg>
+        <div class="hero-floating-card">
+          <div class="fc-icon">🎓</div>
+          <div>
+            <div class="fc-title">下一場：SEL 社會情緒學習工作坊</div>
+            <div class="fc-sub">8/10（一）13:00–16:00・第五醫療大樓 5樓 563會議室</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block container">
+    <div class="block-head"><div class="block-title">課程分類</div></div>
+    <div class="cat-grid" id="category-grid"></div>
+  </section>
+
+  <section class="block container">
+    <div class="block-head">
+      <div class="block-title">即將到來的課程</div>
+      <div class="tab-row" id="home-tab-row">
+        <button class="tab-btn active" data-range="all">全部</button>
+        <button class="tab-btn" data-range="week">本週</button>
+        <button class="tab-btn" data-range="month">本月</button>
+      </div>
+      <span class="block-link" data-nav="list">查看全部 →</span>
+    </div>
+    <div class="course-grid" id="home-course-grid"></div>
+  </section>
+
+  <section class="block container">
+    <div class="panels-row">
+      <div class="panel">
+        <div class="panel-title"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7"/></svg>依分類瀏覽</div>
+        <div class="plist" id="panel-by-category"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3M3 12a9 9 0 1018 0 9 9 0 00-18 0z"/></svg>依學分瀏覽</div>
+        <div class="plist-grid" id="panel-by-credit"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>熱門課程</div>
+        <div id="panel-popular"></div>
+        <button class="panel-cta" data-nav="list">查看全部熱門課程</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ LIST VIEW ============ -->
+<div class="view" id="view-list">
+  <div class="container">
+    <div class="breadcrumb"><a data-nav="home">首頁</a><span class="sep">›</span><span class="current">課程總覽</span></div>
+    <div class="list-header">
+      <div class="list-title">課程總覽</div>
+      <div class="search-bar">
+        <input id="list-search-input" type="text" placeholder="搜學課程名稱、講師、關鍵字…" />
+        <button id="list-search-btn"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg></button>
+      </div>
+      <div class="filter-bar">
+        <div class="filter-field">
+          <label>課程分類</label>
+          <select id="f-cat"><option value="">全部</option></select>
+        </div>
+        <div class="filter-field">
+          <label>學分類別</label>
+          <select id="f-credit"><option value="">全部</option></select>
+        </div>
+        <div class="filter-field">
+          <label>月份</label>
+          <select id="f-month">
+            <option value="">全部</option>
+            <option value="1">1月</option><option value="2">2月</option><option value="3">3月</option>
+            <option value="4">4月</option><option value="5">5月</option><option value="6">6月</option>
+            <option value="7">7月</option><option value="8">8月</option><option value="9">9月</option>
+            <option value="10">10月</option><option value="11">11月</option><option value="12">12月</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label>狀態</label>
+          <select id="f-status">
+            <option value="">全部</option>
+            <option value="open">開放報名</option>
+            <option value="full">已額滿</option>
+            <option value="closed">已結束</option>
+          </select>
+        </div>
+        <button class="filter-clear" id="btn-filter-clear">清除篩選</button>
+      </div>
+    </div>
+    <div class="list-count">共 <strong id="list-count-num">0</strong> 筆課程</div>
+    <div class="lc-list" id="list-course-list"></div>
+    <div class="pagination" id="pagination"></div>
+  </div>
+</div>
+
+<!-- ============ DETAIL VIEW ============ -->
+<div class="view" id="view-detail">
+  <div class="container">
+    <div class="breadcrumb">
+      <a data-nav="home">首頁</a><span class="sep">›</span>
+      <a data-nav="list">課程總覽</a><span class="sep">›</span>
+      <span class="current">課程詳情</span>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-main">
+        <div class="detail-poster" id="detail-poster"></div>
+        <div class="detail-card">
+          <div class="detail-tags" id="detail-tags"></div>
+          <div class="detail-title" id="detail-title"></div>
+          <div class="info-grid" id="detail-info"></div>
+          <div class="detail-cta-row">
+            <button class="btn-primary" id="btn-register"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>我要報名</button>
+            <button class="btn-ghost" id="btn-outlook"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>加入 Outlook 行事曆</button>
+            <button class="btn-outline"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21l-7-4-7 4V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>課程蒐通知</button>
+          </div>
+        </div>
+
+        <div class="detail-card">
+          <div class="accordion acc-item open">
+            <div class="acc-head"><span>課程介紹</span><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div>
+            <div class="acc-body" id="detail-intro"></div>
+          </div>
+          <div class="accordion acc-item">
+            <div class="acc-head"><span>課程目標</span><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div>
+            <div class="acc-body" id="detail-goals"></div>
+          </div>
+          <div class="accordion acc-item">
+            <div class="acc-head"><span>核心能力</span><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div>
+            <div class="acc-body" id="detail-core"></div>
+          </div>
+          <div class="accordion acc-item">
+            <div class="acc-head"><span>講師簡介</span><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div>
+            <div class="acc-body" id="detail-speaker-bio"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-side">
+        <div class="side-card">
+          <div class="side-title">相關資源</div>
+          <div class="side-link"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"/></svg>課程講義下載</div>
+          <div class="side-link"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>延伸閱讀資料</div>
+          <div class="side-link"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>課程回饋表單</div>
+          <div class="side-title" style="margin-top:18px">分享此課程</div>
+          <div class="share-row">
+            <button class="share-btn"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.5 9.87v-6.98H7.9V12h2.6V9.8c0-2.57 1.53-4 3.87-4 1.12 0 2.29.2 2.29.2v2.5h-1.29c-1.27 0-1.67.79-1.67 1.6V12h2.85l-.46 2.89h-2.39v6.98A10 10 0 0022 12z"/></svg></button>
+            <button class="share-btn"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></button>
+            <button class="share-btn"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg></button>
+          </div>
+        </div>
+        <div class="side-card" id="side-recommend">
+          <div class="side-title">其他 CFD 課程推薦</div>
+          <div id="rec-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <div class="footer-brand">奇美醫療財團法人奇美醫院 教師培育中心</div>
+      <div class="footer-sub">Chi Mei Hospital Faculty Development Center © 2026</div>
+    </div>
+    <div class="footer-links">
+      <a>使用說明</a><a>常見問題</a><a>聯絡我們</a>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"><span id="toast-msg">已加入收藏</span></div>
+
+<script>
+/* =========================================================
+ * 資料
+ * ========================================================= */
+const CATEGORIES = [
+  { id:"cfd",     name:"CFD課程",   en:"Clinical Faculty Development", icon:"🎓", color:"var(--primary-light)", fg:"var(--primary-dark)" },
+  { id:"ebm",     name:"實證醫學",  en:"Evidence-Based Medicine",       icon:"📊", color:"#e8f0fe", fg:"#1a56c4" },
+  { id:"lecture", name:"全院演講",  en:"Hospital-wide Lectures",        icon:"🏥", color:"#fdf0eb", fg:"#c2410c" },
+  { id:"skill",   name:"教學技巧",  en:"Teaching Skills",               icon:"💡", color:"#fbeaf2", fg:"#c0578a" },
+  { id:"new",     name:"新進教師",  en:"New Faculty",                   icon:"🌱", color:"#ddf3e7", fg:"#14803c" },
+  { id:"other",   name:"其他課程",  en:"Other Courses",                 icon:"📁", color:"#f3f0ff", fg:"#6b46c1" },
+];
+const CREDITS = [
+  { id:"faculty", name:"臨床教師認證積分" },
+  { id:"physician", name:"西醫師" },
+  { id:"pharmacist", name:"藥師" },
+  { id:"nurse", name:"護理師" },
+  { id:"np", name:"專科護理師" },
+  { id:"other-credit", name:"其他職類" },
+];
+const POSTER_GRADIENTS = {
+  cfd: "linear-gradient(145deg,#0a6b7c,#0e93a8)",
+  ebm: "linear-gradient(145deg,#1a56c4,#4c86e8)",
+  lecture: "linear-gradient(145deg,#c2410c,#f0854a)",
+  skill: "linear-gradient(145deg,#c0578a,#e888b6)",
+  new: "linear-gradient(145deg,#14803c,#4cbf72)",
+  other: "linear-gradient(145deg,#6b46c1,#a17bea)",
+};
+const TAG_CLASS = { cfd:"cfd", faculty:"faculty" };
+
+const COURSES = [
+  { id:1, title:"我的ACGME進修之旅：藥師角色有不一樣嗎？", cat:"cfd", credits:["faculty","pharmacist"], date:"2026-09-20", weekday:"日", timeStart:"10:00", timeEnd:"12:00", location:"第五醫療大樓 3樓 301會議室", speaker:"王小明 副主任", speakerOrg:"奇美醫院 藥劑部", host:"郭進榮 主任 / 奇美醫院 教師培育中心", status:"open", popular:1,
+    intro:"本課程分享藥師在美國ACGME教學體系中扮演的角色與發展，探討藥師如何透過R2C2、ADAPT等互動式教學回饋方法，發揮跨團隊合作的教學效能。",
+    goals:["了解ACGME教學體系下藥師角色的轉變","認識R2C2、ADAPT等互動式教學回饋方法","掌握跨團隊合作之教學實務技巧"],
+    core:["溝通協調","跨團隊合作","教學技巧"],
+    bio:"張凱程醫師現任林口長庚醫院實證醫學中心副主任，專長於臨床藥學教育與跨專業團隊教學設計，長年推動住院醫師與藥師共學計畫。" },
+  { id:2, title:"SEL社會情緒學習工作坊（第一場）", cat:"skill", credits:["faculty"], date:"2026-08-10", weekday:"一", timeStart:"13:00", timeEnd:"16:00", location:"第五醫療大樓 5樓 563會議室", speaker:"怡萱 助理教授", speakerOrg:"師大社會情緒教育與發展中心", host:"教師培育中心", status:"open", popular:2,
+    intro:"透過理論與實作並重的工作坊形式，帶領學員認識社會情緒學習（SEL）的五大核心能力，並實際演練於臨床教學情境中的應用策略。",
+    goals:["認識SEL五大核心能力架構","學習情緒覺察與自我調節技巧","將SEL策略應用於臨床教學情境"],
+    core:["自我覺察","情緒調節","人際互動"],
+    bio:"怡萱助理教授任職於師範大學社會情緒教育與發展中心，長期投入教育現場SEL課程設計與教師培訓工作。" },
+  { id:3, title:"SEL社會情緒學習工作坊（第二場）", cat:"skill", credits:["faculty"], date:"2026-08-27", weekday:"四", timeStart:"14:00", timeEnd:"17:00", location:"第五醫療大樓 5樓 552會議室", speaker:"怡萱 助理教授", speakerOrg:"師大社會情緒教育與發展中心", host:"教師培育中心", status:"open", popular:3,
+    intro:"延續第一場課程內容，本場次聚焦於情境演練與小組討論，協助學員將SEL概念實際內化並應用於日常教學互動中。",
+    goals:["透過情境演練深化SEL概念","小組討論分享教學實務經驗","建立可持續運用的SEL教學工具箱"],
+    core:["同理心","人際互動","問題解決"],
+    bio:"怡萱助理教授任職於師範大學社會情緒教育與發展中心，長期投入教育現場SEL課程設計與教師培訓工作。" },
+  { id:4, title:"OSCE 教學工作坊：標準化病人設計與回饋技巧", cat:"skill", credits:["faculty","physician"], date:"2026-08-14", weekday:"五", timeStart:"09:00", timeEnd:"12:00", location:"第五醫療大樓 5樓 561會議室", speaker:"李宛珊 主任", speakerOrg:"奇美醫院 醫學教育部", host:"教師培育中心", status:"open", popular:4,
+    intro:"介紹OSCE（客觀結構式臨床測驗）之站點設計原則、標準化病人訓練方式，以及考官給予即時回饋的實務技巧。",
+    goals:["理解OSCE設計核心原則","學習標準化病人訓練流程","掌握有效回饋技巧"],
+    core:["臨床評估","教學技巧","回饋能力"],
+    bio:"李宛珊主任長期投入臨床技能教學與評量設計，主導奇美醫院OSCE中心之建置與運作。" },
+  { id:5, title:"小組教學技巧工作坊", cat:"skill", credits:["faculty"], date:"2026-08-05", weekday:"三", timeStart:"09:00", timeEnd:"12:00", location:"第五醫療大樓 5樓 553會議室", speaker:"陳志偉 主任", speakerOrg:"奇美醫院 神經外科", host:"教師培育中心", status:"closed", popular:5,
+    intro:"聚焦於小組教學情境中常見的挑戰，介紹促進學員參與、引導討論、掌控節奏的實務技巧。",
+    goals:["提升小組討論帶領能力","學習引導提問技巧","掌握小組動力管理方法"],
+    core:["引導技巧","團體動力","教學設計"],
+    bio:"陳志偉主任為奇美醫院神經外科主任，同時擔任臨床教師多年，致力於推動住院醫師小組教學模式。" },
+  { id:6, title:"AI 在醫學教育的應用", cat:"cfd", credits:["faculty","physician"], date:"2026-09-15", weekday:"二", timeStart:"13:00", timeEnd:"14:00", location:"第五醫療大樓 5樓 國際會議廳", speaker:"廖家德 主任", speakerOrg:"教學中心 / 實證醫學暨醫療政策中心", host:"陳志成 副院長", status:"open", popular:6,
+    intro:"探討生成式AI於醫學教育中的應用場景，包括教材設計、模擬病人對話生成、學習成效評估等面向，並分享奇美醫院實際導入經驗。",
+    goals:["認識AI於醫學教育的應用場景","了解AI輔助教學工具的優勢與限制","探討導入AI教學工具的實務考量"],
+    core:["數位素養","創新教學","批判思考"],
+    bio:"廖家德主任專長於實證醫學與醫療政策研究，近年積極推動AI輔助教學工具於臨床教育場域之應用。" },
+  { id:7, title:"實證醫學文獻評讀工作坊：入門篇", cat:"ebm", credits:["faculty","physician","nurse"], date:"2026-08-20", weekday:"四", timeStart:"09:00", timeEnd:"12:00", location:"第五醫療大樓 5樓 561會議室", speaker:"黃冠華 副部長", speakerOrg:"奇美醫院 內科部", host:"實證醫學中心", status:"open", popular:7,
+    intro:"從研究設計與統計基礎出發，帶領學員逐步掌握文獻評讀的核心步驟，並以臨床實際案例進行小組演練。",
+    goals:["認識常見研究設計類型","學習文獻評讀核心步驟（PICO）","實際演練文獻評讀技巧"],
+    core:["實證醫學","批判思考","資訊素養"],
+    bio:"黃冠華副部長長期投入實證醫學教學推廣，主持奇美醫院多場實證醫學文獻評讀工作坊。" },
+  { id:8, title:"EPA 工作坊：可信賴專業活動評量實務", cat:"cfd", credits:["faculty","physician"], date:"2026-09-02", weekday:"三", timeStart:"13:00", timeEnd:"16:00", location:"第五醫療大樓 5樓 552會議室", speaker:"吳銘斌 主任", speakerOrg:"奇美醫院 婦產部", host:"教師培育中心", status:"open", popular:8,
+    intro:"介紹可信賴專業活動（EPA）評量架構的設計原則，並透過實作演練協助學員掌握EPA表格設計與評分技巧。",
+    goals:["理解EPA評量架構核心概念","學習EPA表格設計原則","掌握EPA評分實務技巧"],
+    core:["臨床評估","教學設計","回饋能力"],
+    bio:"吳銘斌主任現任奇美醫院婦產部主任，長期投入住院醫師訓練制度設計與EPA評量推動工作。" },
+  { id:9, title:"臨床教師認證積分應用實務", cat:"cfd", credits:["faculty"], date:"2026-08-28", weekday:"五", timeStart:"13:00", timeEnd:"14:00", location:"第五醫療大樓 5樓 553會議室", speaker:"黃建元 總監", speakerOrg:"奇美醫院 教師培育中心", host:"教師培育中心", status:"open", popular:9,
+    intro:"說明臨床教師認證積分制度之申請流程、積分累計方式，並解答學員常見疑問，協助教師順利完成認證。",
+    goals:["了解臨床教師認證積分制度","掌握積分累計與申請流程","釐清常見申請問題"],
+    core:["制度認識","行政流程"],
+    bio:"黃建元總監現任教師培育中心總監，負責統籌全院臨床教師認證與課程規劃業務。" },
+  { id:10, title:"新進教師迎新工作坊：教學角色初體驗", cat:"new", credits:["faculty"], date:"2026-08-06", weekday:"四", timeStart:"09:00", timeEnd:"12:00", location:"第五醫療大樓 5樓 561會議室", speaker:"郭進榮 主任", speakerOrg:"教師培育中心", host:"教師培育中心", status:"open", popular:10,
+    intro:"為新進臨床教師量身打造的入門工作坊，介紹教學角色定位、教學資源運用，以及新手教師常見挑戰之因應策略。",
+    goals:["認識臨床教師角色與職責","熟悉教學資源與支援系統","建立初步教學信心"],
+    core:["角色認同","資源運用"],
+    bio:"郭進榮主任長期投入新進教師培訓計畫，致力於協助新手臨床教師順利銜接教學角色。" },
+  { id:11, title:"敘事醫學工作坊：從病人故事出發的教學設計", cat:"other", credits:["faculty","physician"], date:"2026-09-10", weekday:"四", timeStart:"13:00", timeEnd:"16:00", location:"第五醫療大樓 5樓 563會議室", speaker:"郭妍伶 主任", speakerOrg:"奇美醫院 家庭醫學科", host:"教師培育中心", status:"open", popular:11,
+    intro:"以敘事醫學觀點切入，帶領學員練習傾聽病人故事、書寫反思，並探討如何將敘事元素融入臨床教學設計。",
+    goals:["認識敘事醫學核心理念","練習敘事反思書寫技巧","探討敘事融入教學之可能性"],
+    core:["同理心","敘事能力","反思能力"],
+    bio:"郭妍伶主任專長於家庭醫學與敘事醫學教學，長期推動人文關懷融入臨床教育之相關課程。" },
+  { id:12, title:"臨床病理討論會教學技巧工作坊", cat:"skill", credits:["faculty","physician"], date:"2026-09-18", weekday:"五", timeStart:"07:30", timeEnd:"08:30", location:"第五醫療大樓 5樓 國際會議廳", speaker:"葉麗青 醫師", speakerOrg:"奇美醫院 病理部", host:"教師培育中心", status:"open", popular:12,
+    intro:"分享如何規劃引人入勝的CPC教學流程，包括病例選擇原則、提問設計，以及促進學員主動思考的技巧。",
+    goals:["學習CPC病例選擇原則","掌握提問設計技巧","提升學員主動參與程度"],
+    core:["臨床推理","教學設計","提問技巧"],
+    bio:"葉麗青醫師任職於奇美醫院病理部，多年主持全院CPC教學活動，擅長引導式病例討論教學。" },
+];
+
+let bookmarks = new Set();
+
+/* =========================================================
+ * 工具
+ * ========================================================= */
+const $ = id => document.getElementById(id);
+const esc = s => String(s||"").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function catInfo(id){ return CATEGORIES.find(c=>c.id===id) || CATEGORIES[0]; }
+function creditName(id){ const c = CREDITS.find(c=>c.id===id); return c ? c.name : id; }
+function fmtDate(iso){
+  const d = new Date(iso+"T00:00:00");
+  return { y:d.getFullYear(), m:d.getMonth()+1, day:d.getDate(), wk:"日一二三四五六"[d.getDay()] };
+}
+function courseTagsHtml(c, limit){
+  const info = catInfo(c.cat);
+  let tags = [`<span class="tag cfd">${esc(info.name)}</span>`];
+  (c.credits||[]).forEach(cr => tags.push(`<span class="tag faculty">${esc(creditName(cr))}</span>`));
+  if (limit) tags = tags.slice(0, limit);
+  return `<div class="tag-row">${tags.join("")}</div>`;
+}
+function showToast(msg){
+  $("toast-msg").textContent = msg;
+  const t = $("toast");
+  t.classList.add("show");
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=>t.classList.remove("show"), 2000);
+}
+
+/* =========================================================
+ * 導覽 (view switching)
+ * ========================================================= */
+function goTo(view, opts={}){
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  $("view-"+view).classList.add("active");
+  document.querySelectorAll(".nav-links a").forEach(a=>a.classList.toggle("active", a.dataset.nav===view));
+  window.scrollTo({top:0, behavior:"instant"});
+  if (view === "list") {
+    if (opts.cat !== undefined) $("f-cat").value = opts.cat;
+    if (opts.credit !== undefined) $("f-credit").value = opts.credit;
+    if (opts.q !== undefined) $("list-search-input").value = opts.q;
+    currentPage = 1;
+    renderList();
+  }
+  if (view === "detail" && opts.id) renderDetail(opts.id);
+}
+document.querySelectorAll("[data-nav]").forEach(el=>{
+  el.addEventListener("click", (e)=>{
+    const view = el.dataset.nav;
+    const opts = {};
+    if (el.dataset.cat !== undefined) opts.cat = el.dataset.cat;
+    if (el.dataset.credit !== undefined) opts.credit = el.dataset.credit;
+    goTo(view, opts);
+  });
+});
+
+/* =========================================================
+ * 首頁：分類卡
+ * ========================================================= */
+function renderCategoryGrid(){
+  $("category-grid").innerHTML = CATEGORIES.map(c => `
+    <div class="cat-card" data-cat="${c.id}">
+      <div class="cat-icon" style="background:${c.color};color:${c.fg}">${c.icon}</div>
+      <div class="cat-name">${esc(c.name)}</div>
+      <div class="cat-en">${esc(c.en)}</div>
+    </div>`).join("");
+  $("category-grid").querySelectorAll("[data-cat]").forEach(el=>{
+    el.addEventListener("click", ()=> goTo("list", { cat: el.dataset.cat }));
+  });
+}
+
+/* =========================================================
+ * 首頁：即將到來的課程 (grid cards)
+ * ========================================================= */
+function buildCourseCard(c){
+  const d = fmtDate(c.date);
+  const grad = POSTER_GRADIENTS[c.cat] || POSTER_GRADIENTS.other;
+  const info = catInfo(c.cat);
+  return `<div class="course-card" data-id="${c.id}">
+    <div class="course-poster" style="background:${grad}">
+      <span class="poster-icon">${info.icon}</span>
+      <div class="date-chip"><div class="dc-year">${d.y}</div><div class="dc-day">${d.m}/${String(d.day).padStart(2,'0')}</div><div class="dc-wk">（${d.wk}）</div></div>
+      <div class="poster-title">${esc(c.title)}</div>
+    </div>
+    <div class="course-body">
+      ${courseTagsHtml(c, 3)}
+      <div class="course-title">${esc(c.title)}</div>
+      <div class="course-meta-line"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M12 6v6l4 2"/></svg>${d.m}/${String(d.day).padStart(2,'0')}（${d.wk}）${c.timeStart}-${c.timeEnd}</div>
+      <div class="course-meta-line"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>${esc(c.location)}</div>
+      <div class="course-foot">
+        <span class="btn-detail">查看詳情 <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
+        <button class="bookmark-mini ${bookmarks.has(c.id)?'on':''}" data-bookmark="${c.id}"><svg fill="currentColor" stroke="none" viewBox="0 0 24 24"><path d="M19 21l-7-4-7 4V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+      </div>
+    </div>
+  </div>`;
+}
+function wireCourseCards(container){
+  container.querySelectorAll("[data-bookmark]").forEach(btn=>{
+    btn.addEventListener("click", (e)=>{
+      e.stopPropagation();
+      const id = Number(btn.dataset.bookmark);
+      if (bookmarks.has(id)) { bookmarks.delete(id); showToast("已移除收藏"); }
+      else { bookmarks.add(id); showToast("已加入收藏"); }
+      btn.classList.toggle("on");
+    });
+  });
+  container.querySelectorAll("[data-id]").forEach(card=>{
+    card.addEventListener("click", ()=> goTo("detail", { id: Number(card.dataset.id) }));
+  });
+}
+function renderHomeCourses(range){
+  let list = [...COURSES].sort((a,b)=> a.date.localeCompare(b.date));
+  const today = new Date("2026-07-30");
+  if (range === "week") {
+    const end = new Date(today); end.setDate(end.getDate()+7);
+    list = list.filter(c => new Date(c.date) <= end);
+  } else if (range === "month") {
+    list = list.filter(c => new Date(c.date).getMonth() === today.getMonth());
+  }
+  list = list.slice(0, 6);
+  const grid = $("home-course-grid");
+  grid.innerHTML = list.map(buildCourseCard).join("") || `<div style="grid-column:1/-1;text-align:center;color:var(--gray-500);padding:40px 0">此區間暫無課程</div>`;
+  wireCourseCards(grid);
+}
+document.querySelectorAll("#home-tab-row .tab-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelectorAll("#home-tab-row .tab-btn").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    renderHomeCourses(btn.dataset.range);
+  });
+});
+
+/* =========================================================
+ * 首頁：依分類 / 依學分 / 熱門課程 面板
+ * ========================================================= */
+function renderPanels(){
+  $("panel-by-category").innerHTML = CATEGORIES.map(c=>{
+    const count = COURSES.filter(x=>x.cat===c.id).length;
+    return `<a data-cat="${c.id}"><span>${c.icon} ${esc(c.name)}</span><span class="count">${count}</span></a>`;
+  }).join("");
+  $("panel-by-category").querySelectorAll("[data-cat]").forEach(a=>{
+    a.addEventListener("click", ()=> goTo("list", { cat: a.dataset.cat }));
+  });
+
+  const creditIcons = { faculty:"🎖️", physician:"🩺", pharmacist:"💊", nurse:"👩‍⚕️", np:"🧑‍⚕️", "other-credit":"📋" };
+  $("panel-by-credit").innerHTML = CREDITS.map(cr=>{
+    const count = COURSES.filter(x=>(x.credits||[]).includes(cr.id)).length;
+    return `<div class="pgi" data-credit="${cr.id}"><div class="pgi-icon">${creditIcons[cr.id]||"📋"}</div><div class="pgi-name">${esc(cr.name)}</div><div class="pgi-count">${count}</div></div>`;
+  }).join("");
+  $("panel-by-credit").querySelectorAll("[data-credit]").forEach(el=>{
+    el.addEventListener("click", ()=> goTo("list", { credit: el.dataset.credit }));
+  });
+
+  const popular = [...COURSES].sort((a,b)=>a.popular-b.popular).slice(0,5);
+  $("panel-popular").innerHTML = popular.map((c,i)=>
+    `<div class="rank-item" data-id="${c.id}"><span class="rank-num">${i+1}</span><span>${esc(c.title)}</span></div>`
+  ).join("");
+  $("panel-popular").querySelectorAll("[data-id]").forEach(el=>{
+    el.addEventListener("click", ()=> goTo("detail", { id: Number(el.dataset.id) }));
+  });
+}
+
+/* =========================================================
+ * 課程總覽 (list view)
+ * ========================================================= */
+let currentPage = 1;
+const PAGE_SIZE = 6;
+
+function populateFilterSelects(){
+  $("f-cat").innerHTML = `<option value="">全部</option>` + CATEGORIES.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");
+  $("f-credit").innerHTML = `<option value="">全部</option>` + CREDITS.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");
+}
+
+function getFilteredCourses(){
+  const q = ($("list-search-input").value||"").trim().toLowerCase();
+  const cat = $("f-cat").value;
+  const credit = $("f-credit").value;
+  const month = $("f-month").value;
+  const status = $("f-status").value;
+  return COURSES.filter(c=>{
+    if (cat && c.cat !== cat) return false;
+    if (credit && !(c.credits||[]).includes(credit)) return false;
+    if (month && (new Date(c.date).getMonth()+1) !== Number(month)) return false;
+    if (status && c.status !== status) return false;
+    if (q && !(c.title.toLowerCase().includes(q) || (c.speaker||"").toLowerCase().includes(q))) return false;
+    return true;
+  }).sort((a,b)=> a.date.localeCompare(b.date));
+}
+
+function buildListCard(c){
+  const d = fmtDate(c.date);
+  const grad = POSTER_GRADIENTS[c.cat] || POSTER_GRADIENTS.other;
+  const info = catInfo(c.cat);
+  const statusLabel = c.status==="open" ? "開放報名" : c.status==="full" ? "已額滿" : "已結束";
+  const statusColor = c.status==="open" ? "#14803c" : c.status==="full" ? "#c2410c" : "#78716c";
+  return `<div class="lc-card" data-id="${c.id}">
+    <div class="lc-date"><div class="ld-year">${d.y}</div><div class="ld-day">${String(d.m)}/${String(d.day).padStart(2,'0')}</div><div class="ld-wk">（${d.wk}）</div></div>
+    <div class="lc-thumb" style="background:${grad}"><span class="lt-title">${esc(c.title)}</span></div>
+    <div class="lc-info">
+      ${courseTagsHtml(c, 3)}
+      <div class="lc-title">${esc(c.title)}</div>
+      <div class="lc-sub">
+        <span><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M12 6v6l4 2"/></svg>${c.timeStart}-${c.timeEnd}</span>
+        <span><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>${esc(c.location)}</span>
+        <span><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>${esc(c.speaker)}</span>
+        <span style="color:${statusColor};font-weight:700">● ${statusLabel}</span>
+      </div>
+    </div>
+    <div class="lc-actions">
+      <button class="btn-view">查看詳情</button>
+      <button class="bookmark-mini ${bookmarks.has(c.id)?'on':''}" data-bookmark="${c.id}" style="align-self:flex-end"><svg fill="currentColor" stroke="none" viewBox="0 0 24 24"><path d="M19 21l-7-4-7 4V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+  </div>`;
+}
+
+function renderList(){
+  const filtered = getFilteredCourses();
+  $("list-count-num").textContent = filtered.length;
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  currentPage = Math.min(currentPage, totalPages);
+  const pageItems = filtered.slice((currentPage-1)*PAGE_SIZE, currentPage*PAGE_SIZE);
+
+  const listEl = $("list-course-list");
+  listEl.innerHTML = pageItems.map(buildListCard).join("") ||
+    `<div style="text-align:center;color:var(--gray-500);padding:60px 0">找不到符合條件的課程，試試其他關鍵字。</div>`;
+  listEl.querySelectorAll("[data-bookmark]").forEach(btn=>{
+    btn.addEventListener("click", (e)=>{
+      e.stopPropagation();
+      const id = Number(btn.dataset.bookmark);
+      if (bookmarks.has(id)) { bookmarks.delete(id); showToast("已移除收藏"); }
+      else { bookmarks.add(id); showToast("已加入收藏"); }
+      btn.classList.toggle("on");
+    });
+  });
+  listEl.querySelectorAll(".lc-card").forEach(card=>{
+    card.addEventListener("click", ()=> goTo("detail", { id: Number(card.dataset.id) }));
+  });
+
+  renderPagination(totalPages);
+}
+
+function renderPagination(totalPages){
+  const el = $("pagination");
+  if (totalPages <= 1) { el.innerHTML = ""; return; }
+  let html = `<button class="page-btn" ${currentPage===1?'disabled':''} data-page="${currentPage-1}">‹</button>`;
+  for (let i=1;i<=totalPages;i++){
+    if (totalPages > 7 && i>2 && i<totalPages-1 && Math.abs(i-currentPage)>1) {
+      if (i===3 || i===totalPages-2) html += `<span class="page-dots">…</span>`;
+      continue;
+    }
+    html += `<button class="page-btn ${i===currentPage?'active':''}" data-page="${i}">${i}</button>`;
+  }
+  html += `<button class="page-btn" ${currentPage===totalPages?'disabled':''} data-page="${currentPage+1}">›</button>`;
+  el.innerHTML = html;
+  el.querySelectorAll("[data-page]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      currentPage = Number(btn.dataset.page);
+      renderList();
+      window.scrollTo({top:0, behavior:"smooth"});
+    });
+  });
+}
+
+["f-cat","f-credit","f-month","f-status"].forEach(id=>{
+  $(id).addEventListener("change", ()=>{ currentPage=1; renderList(); });
+});
+$("list-search-btn").addEventListener("click", ()=>{ currentPage=1; renderList(); });
+$("list-search-input").addEventListener("keydown", (e)=>{ if(e.key==="Enter"){ currentPage=1; renderList(); } });
+$("btn-filter-clear").addEventListener("click", ()=>{
+  $("f-cat").value=""; $("f-credit").value=""; $("f-month").value=""; $("f-status").value="";
+  $("list-search-input").value=""; currentPage=1; renderList();
+});
+$("hero-search-btn").addEventListener("click", ()=> goTo("list", { q: $("hero-search-input").value }));
+$("hero-search-input").addEventListener("keydown", (e)=>{ if(e.key==="Enter") goTo("list", { q: $("hero-search-input").value }); });
+
+/* =========================================================
+ * 課程詳情 (detail view)
+ * ========================================================= */
+function renderDetail(id){
+  const c = COURSES.find(x=>x.id===id);
+  if (!c) return;
+  const d = fmtDate(c.date);
+  const grad = POSTER_GRADIENTS[c.cat] || POSTER_GRADIENTS.other;
+  const info = catInfo(c.cat);
+
+  $("detail-poster").style.background = grad;
+  $("detail-poster").innerHTML = `
+    <span class="dp-icon">${info.icon}</span>
+    <div class="dp-date">📅 ${d.y}/${String(d.m).padStart(2,'0')}/${String(d.day).padStart(2,'0')}（星期${d.wk}）<br>⏰ ${c.timeStart}-${c.timeEnd}</div>
+    <div class="dp-title">${esc(c.title)}</div>`;
+
+  $("detail-tags").innerHTML = courseTagsHtml(c);
+  $("detail-title").textContent = c.title;
+
+  const rows = [
+    { icon:`<circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M12 6v6l4 2"/>`, label:"日期", value:`${d.y}/${String(d.m).padStart(2,'0')}/${String(d.day).padStart(2,'0')}（星期${d.wk}）` },
+    { icon:`<path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>`, label:"時間", value:`${c.timeStart}-${c.timeEnd}` },
+    { icon:`<path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>`, label:"地點", value:c.location },
+    { icon:`<path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>`, label:"主講人", value:`${c.speaker}${c.speakerOrg ? ' / '+c.speakerOrg : ''}` },
+    { icon:`<path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-5.13a4 4 0 11-8 0 4 4 0 018 0zm6 3a4 4 0 10-8 0"/>`, label:"主持人", value:c.host },
+  ];
+  $("detail-info").innerHTML = rows.map(r=>`
+    <div class="info-row"><div class="ir-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">${r.icon}</svg></div>
+    <div><div class="ir-label">${r.label}</div><div class="ir-value">${esc(r.value)}</div></div></div>`).join("");
+
+  $("detail-intro").innerHTML = `<p>${esc(c.intro)}</p>`;
+  $("detail-goals").innerHTML = `<ul>${(c.goals||[]).map(g=>`<li>${esc(g)}</li>`).join("")}</ul>`;
+  $("detail-core").innerHTML = `<div class="tag-row">${(c.core||[]).map(k=>`<span class="tag credit">${esc(k)}</span>`).join("")}</div>`;
+  $("detail-speaker-bio").innerHTML = `<p><strong>${esc(c.speaker)}</strong>${c.speakerOrg?'（'+esc(c.speakerOrg)+'）':''}</p><p style="margin-top:8px">${esc(c.bio||"")}</p>`;
+
+  document.querySelectorAll(".acc-item").forEach((item,i)=>{
+    item.classList.toggle("open", i===0);
+    const head = item.querySelector(".acc-head");
+    head.onclick = () => item.classList.toggle("open");
+  });
+
+  $("btn-register").onclick = ()=> showToast("已送出報名（示範功能）");
+  $("btn-outlook").onclick = ()=> showToast("已產生 .ics 檔（示範功能）");
+
+  const rec = COURSES.filter(x=>x.cat==="cfd" && x.id!==c.id).slice(0,3);
+  $("rec-list").innerHTML = rec.map(r=>{
+    const rd = fmtDate(r.date);
+    return `<div class="rec-item" data-id="${r.id}">
+      <div class="rec-thumb" style="background:${POSTER_GRADIENTS[r.cat]}">${catInfo(r.cat).icon}</div>
+      <div><div class="rec-title">${esc(r.title)}</div><div class="rec-meta">${rd.m}/${String(rd.day).padStart(2,'0')} ${r.timeStart}</div></div>
+    </div>`;
+  }).join("");
+  $("rec-list").querySelectorAll("[data-id]").forEach(el=>{
+    el.addEventListener("click", ()=> goTo("detail", { id: Number(el.dataset.id) }));
+  });
+}
+
+/* =========================================================
+ * 啟動
+ * ========================================================= */
+(function init(){
+  $("stat-total").textContent = COURSES.length + 116; // demo total incl. archive
+  populateFilterSelects();
+  renderCategoryGrid();
+  renderHomeCourses("all");
+  renderPanels();
+})();
+</script>
+</body>
+</html>
